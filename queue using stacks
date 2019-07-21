@@ -1,0 +1,56 @@
+class MyQueue { 
+    int stack1[] = new int[10000];
+    int stack2[] = new int[10000];
+    int top1,top2,size,count;
+    /** Initialize your data structure here. */
+    public MyQueue() {
+        top1=-1;
+        top2=-1;
+        size=0;
+     
+    }
+    
+    /** Push element x to the back of queue. */
+    public void push(int x) {
+        stack1[++top1] = x;
+        size++;
+    }
+    
+    /** Removes the element from in front of queue and returns that element. */
+    public int pop() {
+        count=size;
+        while(count>1){
+            stack2[++top2] =stack1[top1--];
+                count--;
+        }
+        size--;
+    
+        int x=stack1[top1--];
+        
+        while(top2!=-1 && top1!=size)
+            stack1[++top1]=stack2[top2--];
+        return x;
+    }
+    
+    /** Get the front element. */
+    public int peek() {
+        return stack1[0];
+    }
+    
+    /** Returns whether the queue is empty. */
+    public boolean empty() {
+        if(size==0)
+            return true;
+        else 
+            return false;
+    }
+}
+
+/**
+ * Your MyQueue object will be instantiated and called as such:
+ * MyQueue obj = new MyQueue();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.peek();
+ * boolean param_4 = obj.empty();
+ */
