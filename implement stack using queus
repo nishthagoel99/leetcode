@@ -1,0 +1,61 @@
+class MyStack {
+     int q[]=new int[1000];
+    int r,f,count,size;
+    /** Initialize your data structure here. */
+    public MyStack() {
+       //int q[]=new int[1000];
+         r=-1;
+         f=0;
+         count=0;
+        size=0;
+    }
+    
+    /** Push element x onto stack. */
+    public void push(int x) {
+        q[++r]=x;
+        size++;
+       // System.out.print(count);
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    public int pop() {
+        count=size;
+        while(count>1)
+        { 
+         //   System.out.print("inside"+q[]);
+            q[++r]=q[f++];
+          //  System.out.print(q[r]);
+            count--;
+            // System.out.println("c="+ count);
+        }
+        //System.out.print("heh "+q[f]);
+        size--;
+         //System.out.print(count);
+        return q[f++];
+        
+    }
+    
+    /** Get the top element. */
+    public int top() {
+        return q[r];
+
+    }
+    
+    /** Returns whether the stack is empty. */
+    public boolean empty() {
+       // System.out.print(count);
+        if(size==0) {
+            return true;
+        }else
+            return false;
+    }
+}
+
+/**
+ * Your MyStack object will be instantiated and called as such:
+ * MyStack obj = new MyStack();
+ * obj.push(x);
+ * int param_2 = obj.pop();
+ * int param_3 = obj.top();
+ * boolean param_4 = obj.empty();
+ */
