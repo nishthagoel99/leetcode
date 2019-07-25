@@ -1,0 +1,26 @@
+class RecentCounter {
+    int q[]=new int[10000];
+        int r,f;
+    public RecentCounter() {
+        r=-1;
+        f=0;
+    }
+    
+    public int ping(int t) {
+        q[++r]=t;
+        int count=0;
+        while(q[f]<t-3000){
+           int s= q[f++];
+        }
+        for(int i=f;i<=r;i++){
+            count++;
+        }
+        return count;
+    }
+}
+
+/**
+ * Your RecentCounter object will be instantiated and called as such:
+ * RecentCounter obj = new RecentCounter();
+ * int param_1 = obj.ping(t);
+ */
