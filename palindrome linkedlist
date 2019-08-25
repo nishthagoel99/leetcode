@@ -1,0 +1,104 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+void printlist(struct ListNode* head){
+    struct ListNode* cur;
+    cur = head;
+    while(cur!=NULL){
+        printf("%d",cur->val);
+        cur = cur->next;
+    }
+}
+
+struct ListNode* getreverse(struct ListNode* head){
+    struct ListNode* cur;
+    struct ListNode* prev;
+    struct ListNode* next;
+    cur=head;
+    prev=NULL;
+    while(cur!=NULL){
+        next = cur->next;
+        cur->next=prev;
+        prev=cur;
+        cur=next;
+    }
+    head = prev;
+   // printlist(head1);
+    return head;
+}
+
+bool check(struct ListNode* head,struct ListNode* head1){
+    struct ListNode* cur;
+    struct ListNode* cur1;
+    cur = head;
+   // printf("linkedlist1:");
+    printlist(cur);
+     //printf("linkedlist2:");
+    cur1 = head1;
+    printlist(cur1);
+     while(cur!=NULL && cur1!=NULL){
+        if(cur->val!=cur1->val){
+            return false;
+        }
+        cur = cur->next;
+        cur1= cur1->next;
+    }
+    return true;
+}
+
+bool isPalindrome(struct ListNode* head){
+    struct ListNode* head1 = NULL;
+    struct ListNode* cur;
+    struct ListNode* prev;
+    bool ans;
+    cur = head;
+    int count=0,k,flag=0,mid;
+    if(head==NULL){
+        return true;
+    }
+    while(cur!=NULL){
+        cur = cur->next;
+        count++;
+    }
+    
+    if(count%2==0)
+    {flag=1;
+     mid = (count/2);}
+    else{
+        flag=0;
+        mid = (count+1)/2;
+    }
+    
+    cur=head;
+    k=0;
+    while(k!=mid-1 && cur){
+        k++;
+        prev=cur;
+        cur = cur->next;
+    }
+    
+    if(flag==1) //even
+    {  head1 = cur->next;
+    // printlist(head1);
+    cur->next=NULL;
+    }else{
+        head1 = cur->next;
+        prev->next= NULL;
+    }
+    
+    head1 = getreverse(head1);   
+    ans = check(head,head1);
+    if(flag==1){
+        cur->next = head1;
+    }else{
+        prev->next=cur;
+        cur->next=head1;
+    }
+    return ans;
+   
+}
+
